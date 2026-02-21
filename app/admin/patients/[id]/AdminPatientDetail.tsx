@@ -68,7 +68,7 @@ export function AdminPatientDetail({ user: initialUser }: { user: User }) {
     }
   }, [initialUser.id]);
 
-  async function handleUpdatePatient(e: React.FormEvent) {
+  async function handleUpdatePatient(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const res = await fetch(`/api/patients/${user.id}`, {
       method: "PATCH",
@@ -143,14 +143,14 @@ export function AdminPatientDetail({ user: initialUser }: { user: User }) {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
-              {user.appointments.map((a) => (
-                <tr key={a.id} className="transition-colors hover:bg-primary-50/30">
-                  <td className="whitespace-nowrap px-5 py-3 text-sm font-medium text-slate-900">{a.provider}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{formatDateTime(a.datetime)}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{a.repeat}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{a.endDate ? new Date(a.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</td>
+              {user.appointments.map((appt) => (
+                <tr key={appt.id} className="transition-colors hover:bg-primary-50/30">
+                  <td className="whitespace-nowrap px-5 py-3 text-sm font-medium text-slate-900">{appt.provider}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{formatDateTime(appt.datetime)}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{appt.repeat}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{appt.endDate ? new Date(appt.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</td>
                   <td className="whitespace-nowrap px-5 py-3 text-right text-sm">
-                    <AppointmentRow appointment={a} onDeleted={refetch} onUpdated={refetch} />
+                    <AppointmentRow appointment={appt} onDeleted={refetch} onUpdated={refetch} />
                   </td>
                 </tr>
               ))}
@@ -190,16 +190,16 @@ export function AdminPatientDetail({ user: initialUser }: { user: User }) {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
-              {user.prescriptions.map((p) => (
-                <tr key={p.id} className="transition-colors hover:bg-primary-50/30">
-                  <td className="whitespace-nowrap px-5 py-3 text-sm font-medium text-slate-900">{p.medication}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{p.dosage}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{p.quantity}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{p.refillOn}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{p.refillSchedule}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{p.endDate ?? "—"}</td>
+              {user.prescriptions.map((rx) => (
+                <tr key={rx.id} className="transition-colors hover:bg-primary-50/30">
+                  <td className="whitespace-nowrap px-5 py-3 text-sm font-medium text-slate-900">{rx.medication}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.dosage}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.quantity}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{new Date(rx.refillOn).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.refillSchedule}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.endDate ? new Date(rx.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</td>
                   <td className="whitespace-nowrap px-5 py-3 text-right text-sm">
-                    <PrescriptionRow prescription={p} onDeleted={refetch} onUpdated={refetch} />
+                    <PrescriptionRow prescription={rx} onDeleted={refetch} onUpdated={refetch} />
                   </td>
                 </tr>
               ))}

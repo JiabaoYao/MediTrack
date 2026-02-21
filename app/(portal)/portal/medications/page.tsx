@@ -35,14 +35,14 @@ export default async function PortalMedicationsPage() {
     orderBy: { refillOn: "asc" },
   });
 
-  const series: PrescriptionSeries[] = prescriptions.map((p: PrescriptionSeries) => ({
-    id: p.id,
-    medication: p.medication,
-    dosage: p.dosage,
-    quantity: p.quantity,
-    refillOn: p.refillOn,
-    refillSchedule: p.refillSchedule,
-    endDate: p.endDate,
+  const series: PrescriptionSeries[] = prescriptions.map((rx: PrescriptionSeries) => ({
+    id: rx.id,
+    medication: rx.medication,
+    dosage: rx.dosage,
+    quantity: rx.quantity,
+    refillOn: rx.refillOn,
+    refillSchedule: rx.refillSchedule,
+    endDate: rx.endDate,
   }));
   const projectedRefills = expandRefills(series, NOW, IN_3_MONTHS);
 
@@ -66,13 +66,13 @@ export default async function PortalMedicationsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
-              {projectedRefills.map((r) => (
-                <tr key={`${r.prescriptionId}-${r.refillDate.toISOString()}`} className="transition-colors hover:bg-primary-50/30">
-                  <td className="whitespace-nowrap px-5 py-4 text-sm font-medium text-slate-900">{r.medication}</td>
-                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{r.dosage}</td>
-                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{r.quantity}</td>
-                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{formatDate(r.refillDate)}</td>
-                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{scheduleLabel(r.refillSchedule)}</td>
+              {projectedRefills.map((row) => (
+                <tr key={`${row.prescriptionId}-${row.refillDate.toISOString()}`} className="transition-colors hover:bg-primary-50/30">
+                  <td className="whitespace-nowrap px-5 py-4 text-sm font-medium text-slate-900">{row.medication}</td>
+                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{row.dosage}</td>
+                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{row.quantity}</td>
+                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{formatDate(row.refillDate)}</td>
+                  <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{scheduleLabel(row.refillSchedule)}</td>
                 </tr>
               ))}
             </tbody>

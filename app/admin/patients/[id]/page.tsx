@@ -37,14 +37,15 @@ export default async function AdminPatientPage({
             repeat: a.repeat,
             endDate: a.endDate?.toISOString() ?? null,
           })),
-          prescriptions: user.prescriptions.map((p: { id: string; medication: string; dosage: string; quantity: number; refillOn: Date; refillSchedule: string; endDate: Date | null }) => ({
-            id: p.id,
-            medication: p.medication,
-            dosage: p.dosage,
-            quantity: p.quantity,
-            refillOn: p.refillOn.toISOString().slice(0, 10),
-            refillSchedule: p.refillSchedule,
-            endDate: p.endDate ? p.endDate.toISOString().slice(0, 10) : null,
+          prescriptions: user.prescriptions.map((patient: { id: string; userId: string; medication: string; dosage: string; quantity: number; refillOn: Date; refillSchedule: string; endDate?: Date | null }) => ({
+            id: patient.id,
+            userId: patient.userId,
+            medication: patient.medication,
+            dosage: patient.dosage,
+            quantity: patient.quantity,
+            refillOn: patient.refillOn.toISOString().slice(0, 10),
+            refillSchedule: patient.refillSchedule,
+            endDate: patient.endDate ? patient.endDate.toISOString().slice(0, 10) : null,
           })),
         }}
       />

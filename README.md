@@ -37,7 +37,7 @@ Mini-EMR and Patient Portal (Next.js, Prisma, PostgreSQL). Built for the Zealthy
    npm run db:seed
    ```
 
-   This creates tables and seeds from `data.json` (sample user: `Ross123@gmail.com` with password `ross@123`).
+   This creates tables and seeds from `data.json` (sample user: `Ross123@gmail.com` with password `Ross123`).
 
 4. **Run locally**
 
@@ -70,7 +70,7 @@ Mini-EMR and Patient Portal (Next.js, Prisma, PostgreSQL). Built for the Zealthy
      ```
 
 5. **Verify**  
-   Open the deployed URL: login at `/` with `Ross123@gmail.com` / `ross@123`, and open `/admin` for the patient table.
+   Open the deployed URL: login at `/` with `Ross123@gmail.com` / `Ross123`, and open `/admin` for the patient table.
 
 ## Project structure
 

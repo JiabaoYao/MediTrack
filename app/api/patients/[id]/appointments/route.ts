@@ -37,7 +37,7 @@ export async function POST(
       provider,
       datetime: new Date(datetime),
       repeat: repeat || "none",
-      endDate,
+      endDate: endDate ? new Date(endDate) : null,
     },
   });
   return NextResponse.json(appointment);

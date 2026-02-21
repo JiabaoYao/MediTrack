@@ -51,33 +51,33 @@ export default async function AdminPatientsPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">
-            {users.map((u) => {
+            {users.map((user) => {
               const occurrences = expandAppointments(
-                u.appointments.map((a) => ({
-                  id: a.id,
-                  provider: a.provider,
-                  datetime: a.datetime,
-                  repeat: a.repeat,
-                  endDate: a.endDate,
+                user.appointments.map((appt) => ({
+                  id: appt.id,
+                  provider: appt.provider,
+                  datetime: appt.datetime,
+                  repeat: appt.repeat,
+                  endDate: appt.endDate,
                 })),
                 NOW,
                 IN_3_MONTHS
               );
               const nextApp = occurrences[0] ?? null;
               return (
-                <tr key={u.id} className="transition-colors hover:bg-primary-50/30">
+                <tr key={user.id} className="transition-colors hover:bg-primary-50/30">
                   <td className="whitespace-nowrap px-5 py-4 text-sm font-medium text-slate-900">
-                    {u.name}
+                    {user.name}
                   </td>
                   <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
-                    {u.email}
+                    {user.email}
                   </td>
                   <td className="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
                     {nextApp ? formatDateTime(nextApp.datetime) : "—"}
                   </td>
                   <td className="whitespace-nowrap px-5 py-4 text-right text-sm">
                     <Link
-                      href={`/admin/patients/${u.id}`}
+                      href={`/admin/patients/${user.id}`}
                       className="link-primary"
                     >
                       View

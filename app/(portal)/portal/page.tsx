@@ -54,14 +54,14 @@ export default async function PortalDashboardPage() {
   );
   const appointmentsIn7Days = allOccurrences.filter((occ) => occ.datetime <= IN_7_DAYS);
   const allRefills = expandRefills(
-    user.prescriptions.map((p) => ({
-      id: p.id,
-      medication: p.medication,
-      dosage: p.dosage,
-      quantity: p.quantity,
-      refillOn: p.refillOn,
-      refillSchedule: p.refillSchedule,
-      endDate: p.endDate,
+    user.prescriptions.map((rx) => ({
+      id: rx.id,
+      medication: rx.medication,
+      dosage: rx.dosage,
+      quantity: rx.quantity,
+      refillOn: rx.refillOn,
+      refillSchedule: rx.refillSchedule,
+      endDate: rx.endDate,
     })),
     NOW,
     IN_3_MONTHS

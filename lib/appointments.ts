@@ -57,17 +57,17 @@ export function expandAppointments(
 ): ExpandedOccurrence[] {
   const result: ExpandedOccurrence[] = [];
 
-  for (const a of appointments) {
-    const first = new Date(a.datetime);
-    const end = a.endDate ? new Date(a.endDate) : null;
-    const dates = getAppointmentOccurrences(first, a.repeat, end, maxEndDate);
+  for (const appt of appointments) {
+    const first = new Date(appt.datetime);
+    const end = appt.endDate ? new Date(appt.endDate) : null;
+    const dates = getAppointmentOccurrences(first, appt.repeat, end, maxEndDate);
     for (const d of dates) {
       if (d >= fromDate) {
         result.push({
           datetime: d,
-          provider: a.provider,
-          repeat: a.repeat,
-          appointmentId: a.id,
+          provider: appt.provider,
+          repeat: appt.repeat,
+          appointmentId: appt.id,
         });
       }
     }
