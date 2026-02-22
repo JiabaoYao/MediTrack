@@ -45,10 +45,10 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary-50 via-white to-slate-50">
-      <div className="w-full max-w-md card p-8 shadow-soft">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">MediTrack</h1>
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-primary-50 via-white to-slate-50">
+      <div className="w-full max-w-md card p-6 sm:p-8 shadow-soft">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">MediTrack</h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>

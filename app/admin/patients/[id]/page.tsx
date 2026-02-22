@@ -22,7 +22,7 @@ export default async function AdminPatientPage({
 
   return (
     <div>
-      <Link href="/admin" className="link-primary text-sm">
+      <Link href="/admin" className="link-primary text-sm inline-block py-2">
         ← Back to patients
       </Link>
       <AdminPatientDetail

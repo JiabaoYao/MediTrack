@@ -38,11 +38,11 @@ export default function NewPatientPage() {
 
   return (
     <div>
-      <Link href="/admin" className="link-primary text-sm">
+      <Link href="/admin" className="link-primary text-sm inline-block py-2">
         ← Back to patients
       </Link>
-      <h1 className="mt-6 text-2xl font-bold text-slate-900 tracking-tight">New patient</h1>
-      <form onSubmit={handleSubmit} className="mt-6 max-w-md space-y-5">
+      <h1 className="mt-4 sm:mt-6 text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">New patient</h1>
+      <form onSubmit={handleSubmit} className="mt-4 sm:mt-6 max-w-md space-y-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1.5">
             Name

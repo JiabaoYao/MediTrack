@@ -83,10 +83,10 @@ export function AdminPatientDetail({ user: initialUser }: { user: User }) {
   }
 
   return (
-    <div className="mt-8 space-y-8">
-      <div className="card p-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">Patient</h2>
+    <div className="mt-6 sm:mt-8 space-y-6 sm:space-y-8">
+      <div className="card p-4 sm:p-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Patient</h2>
           {!editingPatient ? (
             <button
               type="button"
@@ -101,17 +101,17 @@ export function AdminPatientDetail({ user: initialUser }: { user: User }) {
           <form onSubmit={handleUpdatePatient} className="mt-4 space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Name</label>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input-field max-w-xs" />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input-field w-full max-w-xs" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Email</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-field max-w-xs" />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-field w-full max-w-xs" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">New password (optional)</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Leave blank to keep current" className="input-field max-w-xs" />
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Leave blank to keep current" className="input-field w-full max-w-xs" />
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button type="submit" className="btn-primary">Save</button>
               <button type="button" onClick={() => { setEditingPatient(false); setPassword(""); setName(user.name); setEmail(user.email); }} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Cancel</button>
             </div>
@@ -122,40 +122,42 @@ export function AdminPatientDetail({ user: initialUser }: { user: User }) {
       </div>
 
       <div className="card overflow-hidden">
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 px-4 py-3 sm:px-5 sm:py-4">
           <div>
-            <h2 className="text-lg font-semibold text-slate-900">Appointments</h2>
+            <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Appointments</h2>
             <p className="text-xs text-slate-500">Create, edit, or delete appointments below.</p>
           </div>
-          <button type="button" onClick={() => setAddingAppointment(true)} className="link-primary text-sm">
+          <button type="button" onClick={() => setAddingAppointment(true)} className="link-primary text-sm self-start sm:self-auto min-h-[44px] flex items-center">
             Add appointment
           </button>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-slate-200">
-            <thead className="bg-slate-50/80">
-              <tr>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Provider</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Date & time</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Repeat</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">End date</th>
-                <th className="px-5 py-3 text-right text-xs font-semibold uppercase tracking-wider text-slate-500">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
-              {user.appointments.map((appt) => (
-                <tr key={appt.id} className="transition-colors hover:bg-primary-50/30">
-                  <td className="whitespace-nowrap px-5 py-3 text-sm font-medium text-slate-900">{appt.provider}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{formatDateTime(appt.datetime)}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{appt.repeat}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{appt.endDate ? new Date(appt.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-right text-sm">
-                    <AppointmentRow appointment={appt} onDeleted={refetch} onUpdated={refetch} />
-                  </td>
+        <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <div className="min-w-[560px] px-4 sm:px-0">
+            <table className="min-w-full divide-y divide-slate-200">
+              <thead className="bg-slate-50/80">
+                <tr>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Provider</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Date & time</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Repeat</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">End date</th>
+                  <th className="px-3 py-3 sm:px-5 text-right text-xs font-semibold uppercase tracking-wider text-slate-500">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100 bg-white">
+                {user.appointments.map((appt) => (
+                  <tr key={appt.id} className="transition-colors hover:bg-primary-50/30">
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm font-medium text-slate-900">{appt.provider}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{formatDateTime(appt.datetime)}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{appt.repeat}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{appt.endDate ? new Date(appt.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-right text-sm">
+                      <AppointmentRow appointment={appt} onDeleted={refetch} onUpdated={refetch} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         {addingAppointment && (
           <AppointmentForm
@@ -167,44 +169,46 @@ export function AdminPatientDetail({ user: initialUser }: { user: User }) {
       </div>
 
       <div className="card overflow-hidden">
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 px-4 py-3 sm:px-5 sm:py-4">
           <div>
-            <h2 className="text-lg font-semibold text-slate-900">Prescriptions</h2>
+            <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Prescriptions</h2>
             <p className="text-xs text-slate-500">Create, edit, or delete prescriptions below.</p>
           </div>
-          <button type="button" onClick={() => setAddingPrescription(true)} className="link-primary text-sm">
+          <button type="button" onClick={() => setAddingPrescription(true)} className="link-primary text-sm self-start sm:self-auto min-h-[44px] flex items-center">
             Add prescription
           </button>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-slate-200">
-            <thead className="bg-slate-50/80">
-              <tr>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Medication</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Dosage</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Quantity</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">First refill date</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Schedule</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">End date</th>
-                <th className="px-5 py-3 text-right text-xs font-semibold uppercase tracking-wider text-slate-500">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
-              {user.prescriptions.map((rx) => (
-                <tr key={rx.id} className="transition-colors hover:bg-primary-50/30">
-                  <td className="whitespace-nowrap px-5 py-3 text-sm font-medium text-slate-900">{rx.medication}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.dosage}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.quantity}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{new Date(rx.refillOn).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.refillSchedule}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-sm text-slate-600">{rx.endDate ? new Date(rx.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-right text-sm">
-                    <PrescriptionRow prescription={rx} onDeleted={refetch} onUpdated={refetch} />
-                  </td>
+        <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <div className="min-w-[640px] px-4 sm:px-0">
+            <table className="min-w-full divide-y divide-slate-200">
+              <thead className="bg-slate-50/80">
+                <tr>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Medication</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Dosage</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Quantity</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">First refill date</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Schedule</th>
+                  <th className="px-3 py-3 sm:px-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">End date</th>
+                  <th className="px-3 py-3 sm:px-5 text-right text-xs font-semibold uppercase tracking-wider text-slate-500">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100 bg-white">
+                {user.prescriptions.map((rx) => (
+                  <tr key={rx.id} className="transition-colors hover:bg-primary-50/30">
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm font-medium text-slate-900">{rx.medication}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{rx.dosage}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{rx.quantity}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{new Date(rx.refillOn).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{rx.refillSchedule}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-sm text-slate-600">{rx.endDate ? new Date(rx.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</td>
+                    <td className="whitespace-nowrap px-3 py-3 sm:px-5 text-right text-sm">
+                      <PrescriptionRow prescription={rx} onDeleted={refetch} onUpdated={refetch} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         {addingPrescription && (
           <PrescriptionForm
@@ -269,9 +273,9 @@ function AppointmentRow({
     );
   }
   return (
-    <span className="flex justify-end gap-3">
-      <button type="button" onClick={() => setEditing(true)} className="text-primary-600 font-medium hover:underline">Edit</button>
-      <button type="button" onClick={handleDelete} className="text-rose-600 hover:underline">Delete</button>
+    <span className="flex justify-end gap-3 flex-wrap">
+      <button type="button" onClick={() => setEditing(true)} className="text-primary-600 font-medium hover:underline min-h-[44px] px-2 -my-1 flex items-center">Edit</button>
+      <button type="button" onClick={handleDelete} className="text-rose-600 hover:underline min-h-[44px] px-2 -my-1 flex items-center">Delete</button>
     </span>
   );
 }
@@ -332,9 +336,9 @@ function PrescriptionRow({
     );
   }
   return (
-    <span className="flex justify-end gap-3">
-      <button type="button" onClick={() => setEditing(true)} className="text-primary-600 font-medium hover:underline">Edit</button>
-      <button type="button" onClick={handleDelete} className="text-rose-600 hover:underline">Delete</button>
+    <span className="flex justify-end gap-3 flex-wrap">
+      <button type="button" onClick={() => setEditing(true)} className="text-primary-600 font-medium hover:underline min-h-[44px] px-2 -my-1 flex items-center">Edit</button>
+      <button type="button" onClick={handleDelete} className="text-rose-600 hover:underline min-h-[44px] px-2 -my-1 flex items-center">Delete</button>
     </span>
   );
 }
@@ -367,7 +371,7 @@ function AppointmentForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-slate-200 bg-slate-50/50 p-5">
+    <form onSubmit={handleSubmit} className="border-t border-slate-200 bg-slate-50/50 p-4 sm:p-5">
       <div className="flex flex-wrap items-end gap-3">
         <div>
           <label className="block text-xs font-medium text-slate-500 mb-1">Provider</label>
@@ -446,7 +450,7 @@ function PrescriptionForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-slate-200 bg-slate-50/50 p-5">
+    <form onSubmit={handleSubmit} className="border-t border-slate-200 bg-slate-50/50 p-4 sm:p-5">
       <div className="flex flex-wrap items-end gap-3">
         <div>
           <label className="block text-xs font-medium text-slate-500 mb-1">Medication</label>

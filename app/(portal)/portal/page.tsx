@@ -69,21 +69,21 @@ export default async function PortalDashboardPage() {
   const refillsIn7Days = allRefills.filter((r) => r.refillDate <= IN_7_DAYS);
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+    <div className="space-y-6 sm:space-y-8">
+      <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
         Welcome, {user.name}
       </h1>
 
-      <section className="card p-6">
-        <h2 className="text-lg text-orange-500 font-semibold text-slate-900">Your info</h2>
+      <section className="card p-4 sm:p-6">
+        <h2 className="text-base sm:text-lg text-orange-500 font-semibold text-slate-900">Your info</h2>
         <p className="mt-2 text-slate-600">
           {user.name} · {user.email}
         </p>
       </section>
 
-      <section className="card p-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">Next 7 days – Appointments</h2>
+      <section className="card p-4 sm:p-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Next 7 days – Appointments</h2>
           <Link href="/portal/appointments" className="link-primary text-sm">
             View all
           </Link>
@@ -102,9 +102,9 @@ export default async function PortalDashboardPage() {
         )}
       </section>
 
-      <section className="card p-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">Next 7 days – Medication refills</h2>
+      <section className="card p-4 sm:p-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Next 7 days – Medication refills</h2>
           <Link href="/portal/medications" className="link-primary text-sm">
             View all
           </Link>
